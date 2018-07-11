@@ -1,9 +1,6 @@
 package ru.gladkikh.javacore2.homework3;
 
-import java.awt.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
