@@ -1,23 +1,27 @@
 package ru.gladkikh.javacore2.homework2;
 
-import org.sqlite.JDBC;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Exercise {
 
-
     public static void main(String[] args) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            //http://mydesignstudio.ru/2016/01/15/apache-maven-sqlite-dependency/
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
-            connection.close();
-        } catch (Exception e) {
+
+        try (DBHelper dbHelper = DBHelper.getInstance()) {
+            Controller controller = new Controller(dbHelper);
+
+            while (!Thread.interrupted()) {
+                Scanner scan = new Scanner(System.in);
+                String s = scan.nextLine();
+                controller.runCommand(s);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }
