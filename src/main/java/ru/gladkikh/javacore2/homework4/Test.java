@@ -4,71 +4,38 @@ import java.util.stream.IntStream;
 
 public class Test {
 
-
     public static void main(String[] args) {
 
-        MyThread thredPrintC = new MyThread(null, "C");
-        MyThread thredPrintB = new MyThread(thredPrintC, "B");
-        MyThread thredPrintA = new MyThread(thredPrintB, "A");
+        Object lockA = new Object();
+        Object lockB = new Object();
+        Object lockC = new Object();
 
 
-        thredPrintA.start();
-        thredPrintB.start();
-        thredPrintC.start();
+        Thread threadA = new Thread(() -> {
+           synchronized (lockA){
+             while (true){
+                 //try {
+                     //lockA.wait();
+                     System.out.println("A");
+                 //} catch (InterruptedException e) {
+                   //  e.printStackTrace();
+                // }
+             }
+           }
+        });
 
+        threadA.start();
 
-        IntStream.range(1, 5)
-                .forEach(value -> {
-                    synchronized (thredPrintA) {
-                        thredPrintA.notify();
-                    }
-
-                });
-
-        thredPrintA.interrupt();
-        thredPrintB.interrupt();
-        thredPrintC.interrupt();
+//        for (int i = 0; i < 5; i++) {
+//            synchronized (lockA){
+//                threadA.notify();
+//            }
+//        }
 
     }
 
 
-    static class MyThread extends Thread {
 
-        String str;
-        Object notifyObj;
-
-        public MyThread(Object notifyObj, String str) {
-            this.str = str;
-            this.notifyObj = notifyObj;
-        }
-
-        @Override
-        public void run() {
-            synchronized (this) {
-
-                while (!Thread.currentThread().isInterrupted()) {
-                    try {
-                        this.wait();
-                        System.out.print(str);
-
-                        if (notifyObj != null) {
-                            synchronized (notifyObj) {
-                                notifyObj.notify();
-                            }
-                        }
-
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-
-            }
-
-        }
-    }
 
 
 }
