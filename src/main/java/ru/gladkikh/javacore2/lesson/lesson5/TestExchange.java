@@ -1,4 +1,4 @@
-package ru.gladkikh.javacore2.lesson5;
+package ru.gladkikh.javacore2.lesson.lesson5;
 
 import java.util.Random;
 import java.util.concurrent.Exchanger;

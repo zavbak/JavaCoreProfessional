@@ -11,9 +11,9 @@ public class Tunnel extends Stage {
         try {
             try {
                 System.out.println(c.getName() + " готовится к этапу(ждет): " +
-                        description + "в тонеле " + MainClass.SEMAPHORE.getQueueLength());
+                        description + " сейчас в тонеле " + MainClass.SEMAPHORE_FOR_TUNEL.getQueueLength() + " машин!");
 
-                MainClass.SEMAPHORE.acquire();
+                MainClass.SEMAPHORE_FOR_TUNEL.acquire();
 
                 System.out.println(c.getName() + " начал этап: " + description);
                 Thread.sleep(length / c.getSpeed() * 1000);
@@ -23,7 +23,7 @@ public class Tunnel extends Stage {
                 System.out.println(c.getName() + " закончил этап: " +
                         description);
 
-                MainClass.SEMAPHORE.release();
+                MainClass.SEMAPHORE_FOR_TUNEL.release();
 
             }
         } catch (Exception e) {

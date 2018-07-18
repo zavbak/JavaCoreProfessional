@@ -8,14 +8,13 @@ import java.util.concurrent.Semaphore;
 public class MainClass {
     public static final int CARS_COUNT = 6;
 
+
     public static final CountDownLatch START = new CountDownLatch(CARS_COUNT +1);
 
-    public static final Semaphore SEMAPHORE = new Semaphore(2, true);
+    public static final Semaphore SEMAPHORE_FOR_TUNEL = new Semaphore(2, true);
 
     public static final CyclicBarrier BARRIER_FINISH = new CyclicBarrier(CARS_COUNT, () -> {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
-
-
     });
 
 
