@@ -33,6 +33,7 @@ public class Car implements Runnable {
     @Override
     public void run() {
         try {
+
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int) (Math.random() * 800));
             System.out.println(this.name + " готов");
