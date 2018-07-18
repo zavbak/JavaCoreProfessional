@@ -1,11 +1,23 @@
 package ru.gladkikh.javacore2.homework5;
 
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 
 public class MainClass {
-    public static final int CARS_COUNT = 4;
+    public static final int CARS_COUNT = 6;
 
     public static final CountDownLatch START = new CountDownLatch(CARS_COUNT +1);
+
+    public static final Semaphore SEMAPHORE = new Semaphore(2, true);
+
+    public static final CyclicBarrier BARRIER_FINISH = new CyclicBarrier(CARS_COUNT, () -> {
+        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+
+
+    });
+
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
@@ -26,7 +38,9 @@ public class MainClass {
         START.countDown();
 
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+
+
+        //System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
     }
 
 }

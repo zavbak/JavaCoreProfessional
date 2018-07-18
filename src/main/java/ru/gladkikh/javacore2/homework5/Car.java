@@ -1,6 +1,8 @@
 package ru.gladkikh.javacore2.homework5;
 
 
+import java.util.concurrent.BrokenBarrierException;
+
 public class Car implements Runnable {
     private static int CARS_COUNT;
 
@@ -46,5 +48,15 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+
+        try {
+            MainClass.BARRIER_FINISH.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
