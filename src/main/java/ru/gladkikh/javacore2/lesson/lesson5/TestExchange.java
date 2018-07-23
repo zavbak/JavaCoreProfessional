@@ -2,11 +2,16 @@ package ru.gladkikh.javacore2.lesson.lesson5;
 
 import java.util.Random;
 import java.util.concurrent.Exchanger;
+import java.util.logging.Logger;
 
 public class TestExchange {
     private static final Exchanger<String> EXCHANGER = new Exchanger<>();
 
     public static void main(String[] args) {
+        Logger log = Logger.getLogger(Exchanger.class.getName());
+
+        log.info("khjkhjk");
+
         new Thread(() -> {
             Random random = new Random();
             try {
